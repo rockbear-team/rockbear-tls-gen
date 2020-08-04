@@ -1,0 +1,21 @@
+{
+  "name": "rockbear-tls-cert-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretty": "prettier --parser typescript --single-quote --trailing-comma none --print-width 120 --no-semi --write 'rockbear-tls.ts'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.4",
+    "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "@types/shelljs": "^0.8.8",
+    "@types/yargs": "^15.0.5",
+    "prettier": "^2.0.5"
+  }
+}
