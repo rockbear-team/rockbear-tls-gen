@@ -6,18 +6,30 @@ import { exec } from 'shelljs'
 const HOST = argv.host
 const IP = argv.ip
 const PASSWORD = argv.password
+const SUBJ = '/C=MY/ST=IPOH/L=PERAK/O=ExampleCompany/OU=IT/CN=${HOST}/emailAddress=test@example.com'
 
 const CWD = `${process.cwd()}/${IP}`
+
+if (!HOST) {
+  throw new Error('Host are required!')
+}
+
+if (!IP) {
+  throw new Error('IP Address are required!')
+}
+
+if (!PASSWORD) {
+  throw new Error('Password are required!')
+}
 
 // create folder
 exec(`mkdir ${IP}`, { cwd: process.cwd() })
 
 // server cert
 exec(`openssl genrsa -passout pass:${PASSWORD} -aes256 -out ca-key.pem 4096`, { cwd: CWD })
-exec(
-  `openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -passin pass:${PASSWORD} -subj "/C=MY/ST=IPOH/L=PERAK/O=ExampleCompany/OU=IT/CN=${HOST}/emailAddress=test@example.com"`,
-  { cwd: CWD }
-)
+exec(`openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -passin pass:${PASSWORD} -subj ${SUBJ}`, {
+  cwd: CWD
+})
 exec('openssl genrsa -out server-key.pem 4096', { cwd: CWD })
 exec(`openssl req -subj "/CN=${HOST}" -sha256 -new -key server-key.pem -out server.csr`, { cwd: CWD })
 exec(`echo subjectAltName = DNS:${HOST},IP:${IP},IP:127.0.0.1 >> extfile.cnf`, { cwd: CWD })
