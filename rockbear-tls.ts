@@ -6,8 +6,6 @@ let HOST
 let IP
 let PASSWORD
 
-const SUBJ = '/C=MY/ST=IPOH/L=PERAK/O=ExampleCompany/OU=IT/CN=${HOST}/emailAddress=test@example.com'
-
 process.argv.map((val, index) => {
   if (val === '--host') {
     if (!process.argv[index + 1]) {
@@ -34,6 +32,7 @@ process.argv.map((val, index) => {
   }
 })
 
+const SUBJ = '/C=MY/ST=IPOH/L=PERAK/O=ExampleCompany/OU=IT/CN=${HOST}/emailAddress=test@example.com'
 const CWD = IP
 
 // create folder
