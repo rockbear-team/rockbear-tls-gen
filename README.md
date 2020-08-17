@@ -1,5 +1,7 @@
 ## RockBear TLS Cert Gen
 
+### PLEASE PLACE EXECUTABLE SCRIPT INSIDE SERVER_BUILD_DIR FOLDER
+
 #### build
 ```
 tsc
